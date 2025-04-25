@@ -4,7 +4,7 @@ import { useParams } from 'next/navigation'
 import ReactMarkdown from 'react-markdown'
 import { useState, useEffect } from 'react'
 
-const page = () => {
+const Page = () => {
     let params = useParams()
     const [posts, setPosts] = useState([]);
 
@@ -46,4 +46,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page
