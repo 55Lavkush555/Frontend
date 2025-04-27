@@ -1,7 +1,6 @@
 "use client"
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import ReactMarkdown from "react-markdown"
 
 export default function Home() {
 
@@ -82,12 +81,12 @@ export default function Home() {
           <div className="post w-full md:w-2/3 mx-auto bg-white rounded-2xl shadow-lg p-5 border-2 border-black">
 
             {posts.length > 0 ? (
-              <div>
+              <div className="max-h-80 overflow-auto relative">
                 <h1 className="text-2xl">{posts[posts.length - 1].title}</h1>
                 <p className="text-gray-600">{posts[posts.length - 1].date}</p>
-                <div><ReactMarkdown>{posts[posts.length - 1].content}</ReactMarkdown></div>
+                <div dangerouslySetInnerHTML={{ __html: posts[posts.length - 1].content }}></div>
                 <div className="w-full flex justify-end">
-                  <Link href={"/Blog"}><button className="text-2xl bg-red-600 rounded-full px-5 mr-2.5 text-white mt-2.5 focus:bg-red-700 hover:bg-red-700 cursor-pointer w-fit">See all</button></Link>
+                  <Link href={"/Blog"} className="absolute top-0 right-0"><button className="text-2xl bg-red-600 rounded-full px-5 mr-2.5 text-white mt-2.5 focus:bg-red-700 hover:bg-red-700 cursor-pointer w-fit">See all</button></Link>
                 </div>
               </div>
             ) : (
