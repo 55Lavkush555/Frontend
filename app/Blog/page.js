@@ -58,7 +58,7 @@ const Blog = () => {
           <h2 className='text-2xl text-gray-500'>Search Reasult for {search}</h2>
           {posts.map((post, index) => (
             <div key={index}>
-              {post.title.toLowerCase().includes(search) && (
+              {post.title.toLowerCase().includes(search.toLowerCase()) && (
                 <div className="relative card my-5 p-4 border border-gray-300 rounded-xl shadow-md font-sans max-h-48 overflow-hidden">
                   <h1 className='text-2xl font-semibold'>{post.title}</h1>
                   <p className='text-gray-400 text-sm mb-2'>{post.date || 'No Date Provided'}</p>
