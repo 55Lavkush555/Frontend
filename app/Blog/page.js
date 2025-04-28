@@ -55,7 +55,7 @@ const Blog = () => {
 
       {isSearch && (
         <>
-          <h2 className='text-2xl text-gray-500'>Search Reasult for "{search}"</h2>
+          <h2 className='text-2xl text-gray-500'>Search Reasult for {search}</h2>
           {posts.map((post, index) => (
             <div key={index}>
               {post.title.toLowerCase().includes(search) && (
