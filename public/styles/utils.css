@@ -1,0 +1,195 @@
+/* Utility CSS (Scoped inside .cont) */
+
+/* Typography Utilities */
+.cont .text-center { text-align: center; }
+.cont .text-left { text-align: left; }
+.cont .text-right { text-align: right; }
+
+.cont .text-sm { font-size: 0.875rem; }
+.cont .text-base { font-size: 1rem; }
+.cont .text-lg { font-size: 1.125rem; }
+.cont .text-xl { font-size: 1.25rem; }
+.cont .text-2xl { font-size: 1.5rem; }
+.cont .text-3xl { font-size: 1.875rem; }
+.cont .font-bold { font-weight: bold; }
+.cont .font-semibold { font-weight: 600; }
+.cont .font-light { font-weight: 300; }
+
+/* Margin & Padding Utilities */
+.cont .m-0 { margin: 0; }
+.cont .mt-4 { margin-top: 1rem; }
+.cont .mb-4 { margin-bottom: 1rem; }
+.cont .p-2 { padding: 0.5rem; }
+.cont .p-4 { padding: 1rem; }
+.cont .px-4 { padding-left: 1rem; padding-right: 1rem; }
+.cont .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+
+/* Margin Utilities */
+.cont .m-1 { margin: 0.25rem; }
+.cont .m-2 { margin: 0.5rem; }
+.cont .m-3 { margin: 0.75rem; }
+.cont .m-4 { margin: 1rem; }
+.cont .m-5 { margin: 1.25rem; }
+
+.cont .mt-1 { margin-top: 0.25rem; }
+.cont .mt-2 { margin-top: 0.5rem; }
+.cont .mt-3 { margin-top: 0.75rem; }
+.cont .mt-5 { margin-top: 1.25rem; }
+
+.cont .mb-1 { margin-bottom: 0.25rem; }
+.cont .mb-2 { margin-bottom: 0.5rem; }
+.cont .mb-3 { margin-bottom: 0.75rem; }
+.cont .mb-5 { margin-bottom: 1.25rem; }
+
+.cont .ml-1 { margin-left: 0.25rem; }
+.cont .ml-2 { margin-left: 0.5rem; }
+.cont .ml-3 { margin-left: 0.75rem; }
+.cont .ml-4 { margin-left: 1rem; }
+.cont .ml-5 { margin-left: 1.25rem; }
+
+.cont .mr-1 { margin-right: 0.25rem; }
+.cont .mr-2 { margin-right: 0.5rem; }
+.cont .mr-3 { margin-right: 0.75rem; }
+.cont .mr-4 { margin-right: 1rem; }
+.cont .mr-5 { margin-right: 1.25rem; }
+
+/* Padding Utilities */
+.cont .p-1 { padding: 0.25rem; }
+.cont .p-2 { padding: 0.5rem; }
+.cont .p-3 { padding: 0.75rem; }
+.cont .p-5 { padding: 1.25rem; }
+
+.cont .pt-1 { padding-top: 0.25rem; }
+.cont .pt-2 { padding-top: 0.5rem; }
+.cont .pt-3 { padding-top: 0.75rem; }
+.cont .pt-4 { padding-top: 1rem; }
+.cont .pt-5 { padding-top: 1.25rem; }
+
+.cont .pb-1 { padding-bottom: 0.25rem; }
+.cont .pb-2 { padding-bottom: 0.5rem; }
+.cont .pb-3 { padding-bottom: 0.75rem; }
+.cont .pb-4 { padding-bottom: 1rem; }
+.cont .pb-5 { padding-bottom: 1.25rem; }
+
+.cont .pl-1 { padding-left: 0.25rem; }
+.cont .pl-2 { padding-left: 0.5rem; }
+.cont .pl-3 { padding-left: 0.75rem; }
+.cont .pl-4 { padding-left: 1rem; }
+.cont .pl-5 { padding-left: 1.25rem; }
+
+.cont .pr-1 { padding-right: 0.25rem; }
+.cont .pr-2 { padding-right: 0.5rem; }
+.cont .pr-3 { padding-right: 0.75rem; }
+.cont .pr-4 { padding-right: 1rem; }
+.cont .pr-5 { padding-right: 1.25rem; }
+
+/* X and Y axis utilities */
+.cont .px-1 { padding-left: 0.25rem; padding-right: 0.25rem; }
+.cont .px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
+.cont .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+.cont .px-5 { padding-left: 1.25rem; padding-right: 1.25rem; }
+
+.cont .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+.cont .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+.cont .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+.cont .py-5 { padding-top: 1.25rem; padding-bottom: 1.25rem; }
+
+.cont .mx-auto { margin-left: auto; margin-right: auto; }
+
+
+/* Layout */
+.cont .flex { display: flex; }
+.cont .items-center { align-items: center; }
+.cont .justify-between { justify-content: space-between; }
+.cont .gap-4 { gap: 1rem; }
+
+/* Rounded */
+.cont .rounded { border-radius: 0.25rem; }
+.cont .rounded-md { border-radius: 0.375rem; }
+.cont .rounded-lg { border-radius: 0.5rem; }
+.cont .rounded-full { border-radius: 999999999px;}
+
+/* Background Colors */
+.cont .bg-white     { background-color: #ffffff; }
+.cont .bg-black     { background-color: #000000; }
+.cont .bg-gray-50   { background-color: #f9fafb; }
+.cont .bg-gray-100  { background-color: #f3f4f6; }
+.cont .bg-gray-200  { background-color: #e5e7eb; }
+.cont .bg-red-100   { background-color: #fee2e2; }
+.cont .bg-red-500   { background-color: #ef4444; }
+.cont .bg-green-100 { background-color: #d1fae5; }
+.cont .bg-green-500 { background-color: #10b981; }
+.cont .bg-blue-100  { background-color: #dbeafe; }
+.cont .bg-blue-500  { background-color: #3b82f6; }
+.cont .bg-yellow-100 { background-color: #fef9c3; }
+.cont .bg-yellow-400 { background-color: #facc15; }
+.cont .bg-purple-100 { background-color: #f3e8ff; }
+.cont .bg-purple-500 { background-color: #8b5cf6; }
+
+
+/* Text Colors */
+.cont .text-red { color: #e74c3c; }
+.cont .text-blue { color: #3498db; }
+.cont .text-gray { color: #555; }
+
+/* Text Colors */
+.cont .text-white     { color: #ffffff; }
+.cont .text-black     { color: #000000; }
+.cont .text-gray-500  { color: #6b7280; }
+.cont .text-gray-800  { color: #1f2937; }
+.cont .text-red-500   { color: #ef4444; }
+.cont .text-red-700   { color: #b91c1c; }
+.cont .text-green-500 { color: #10b981; }
+.cont .text-green-700 { color: #047857; }
+.cont .text-blue-500  { color: #3b82f6; }
+.cont .text-blue-700  { color: #1d4ed8; }
+.cont .text-yellow-500 { color: #eab308; }
+.cont .text-purple-500 { color: #8b5cf6; }
+
+
+/* Border */
+.cont .border { border: 1px solid #ccc; }
+.cont .border-l-4 { border-left-width: 4px; }
+.cont .border-yellow { border-color: #f1c40f; }
+
+/* Code and Pre */
+.cont pre {
+  background: #f4f4f4;
+  padding: 15px;
+  overflow-x: auto;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+.cont code {
+  font-family: 'Courier New', Courier, monospace;
+  color: #e74c3c;
+}
+
+/* Links */
+.cont a {
+  color: #3498db;
+  text-decoration: none;
+}
+.cont a:hover {
+  text-decoration: underline;
+}
+
+/* Note Box Example */
+.cont .note {
+  background: #fffbcc;
+  padding: 10px;
+  border-left: 5px solid #f1c40f;
+  margin: 20px 0;
+  border-radius: 5px;
+}
+
+.cont ol > li {
+  list-style: decimal;
+  margin-left: 20px;
+}
+
+.cont ul > li {
+  list-style: disc;
+  margin-left: 20px;
+                  }
