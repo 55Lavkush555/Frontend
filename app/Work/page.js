@@ -4,7 +4,8 @@ import Card from './Card'
 const Work = () => {
     return (
         <div className='container mx-auto py-3.5'>
-
+            <Card head={"iChat | Chat app"} body={"iChat is a chat app in which you can simplify login with your name and you can chat in group. It is created using Tailwindcss, Mongodb and Next.js it is fully responsive and good-looking."} img_link={"/IMG_20250525_080915.jpg"} project_link={"https://chat-app-wqpr.vercel.app/"} />
+        
             <Card head={"iPass | Password Manager"} body={"iPass is a password manager which can save your passwords to your browsers local storage and it is also responsive in desine. It is created using React and Tailwindcss."} img_link={"/Password-Manager.png"} project_link={"https://password-manager-9uxh.onrender.com/"} />
 
             <Card head={"Netflix Clone"} body={"It is a clone of the official website of Netflix. It is created using HTML and CSS. It can look similar like Netflix website. And it is responsive"} img_link={"/Netflix_clone.png"} project_link={"https://github.com/55Lavkush555/netflix_clone.github.io"} />
