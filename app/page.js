@@ -1,29 +1,8 @@
 import Link from 'next/link';
 import BlogCard from '@/components/BlogCard';
 import ProjectCard from '@/components/ProjectCard';
-import connectDB from '@/lib/mongodb';
-import Blog from '@/lib/models/Blog';
-import Project from '@/lib/models/Project';
-
-async function getFeaturedProjects() {
-  try {
-    await connectDB();
-    return await Project.find({ featured: true }).sort({ createdAt: -1 }).lean();
-  } catch (err) {
-    console.error('[getFeaturedProjects]', err.message);
-    return [];
-  }
-}
-
-async function getRecentBlogs() {
-  try {
-    await connectDB();
-    return await Blog.find({}).sort({ createdAt: -1 }).limit(3).lean();
-  } catch (err) {
-    console.error('[getRecentBlogs]', err.message);
-    return [];
-  }
-}
+import { getRecentBlogs } from '@/services/blogService';
+import { getFeaturedProjects } from '@/services/projectService';
 
 const techStack = [
   { name: 'HTML', icon: '🌐' },
@@ -48,13 +27,13 @@ export const metadata = {
 export default async function HomePage() {
   const [featuredProjects, recentBlogs] = await Promise.all([
     getFeaturedProjects(),
-    getRecentBlogs(),
+    getRecentBlogs(3),
   ]);
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-24">
 
-      {/* ── Hero ── */}
+      {/* Hero */}
       <section className="fade-in flex flex-col md:flex-row items-center md:items-start gap-14 mb-32">
         <div className="flex-1 order-2 md:order-1">
           <span className="inline-block text-xs font-medium text-gray-500 border border-gray-200 rounded-full px-3 py-1 mb-5 uppercase tracking-widest">
@@ -93,7 +72,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── Featured Projects ── */}
+      {/* Featured Projects */}
       <section className="fade-in-delay-1 mb-28">
         <div className="flex items-end justify-between mb-8">
           <div>
@@ -109,9 +88,7 @@ export default async function HomePage() {
         </div>
         {featuredProjects.length === 0 ? (
           <div className="border border-dashed border-gray-200 rounded-2xl p-14 text-center">
-            <p className="text-gray-400 text-sm">
-              No featured projects yet. Add some from the admin panel.
-            </p>
+            <p className="text-gray-400 text-sm">No featured projects yet.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -122,7 +99,7 @@ export default async function HomePage() {
         )}
       </section>
 
-      {/* ── Tech Stack ── */}
+      {/* Tech Stack */}
       <section className="fade-in-delay-2 mb-28">
         <div className="mb-8">
           <p className="text-xs text-gray-400 uppercase tracking-widest mb-1">Skills</p>
@@ -141,7 +118,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── Recent Blog Posts ── */}
+      {/* Recent Posts */}
       <section className="fade-in-delay-3 mb-28">
         <div className="flex items-end justify-between mb-8">
           <div>
@@ -157,9 +134,7 @@ export default async function HomePage() {
         </div>
         {recentBlogs.length === 0 ? (
           <div className="border border-dashed border-gray-200 rounded-2xl p-14 text-center">
-            <p className="text-gray-400 text-sm">
-              No blog posts yet. Write one from the admin panel.
-            </p>
+            <p className="text-gray-400 text-sm">No blog posts yet.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -170,16 +145,14 @@ export default async function HomePage() {
         )}
       </section>
 
-      {/* ── Client Review (bottom) ── */}
+      {/* Client Review */}
       <section className="fade-in-delay-3">
         <div className="mb-8">
           <p className="text-xs text-gray-400 uppercase tracking-widest mb-1">Testimonial</p>
           <h2 className="text-2xl font-bold text-black">Client Review</h2>
         </div>
         <div className="relative bg-white border border-gray-100 rounded-2xl p-8 shadow-sm overflow-hidden">
-          <div className="absolute top-6 left-8 text-7xl text-gray-100 font-serif leading-none select-none">
-            "
-          </div>
+          <div className="absolute top-4 left-7 text-7xl text-gray-100 font-serif leading-none select-none">"</div>
           <div className="relative">
             <p className="text-gray-600 text-base leading-relaxed mb-6 max-w-2xl">
               Working with Lavkush was a great experience. He built a clean and
@@ -191,7 +164,7 @@ export default async function HomePage() {
                 G
               </div>
               <div>
-                <p className="text-sm font-semibold text-black">PowerHouse Gym Owner</p>
+                <p className="text-sm font-semibold text-black">Gym Owner</p>
                 <p className="text-xs text-gray-400">Satisfied Client</p>
               </div>
             </div>

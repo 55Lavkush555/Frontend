@@ -138,7 +138,7 @@ export default function ContactPage() {
             </div>
             <div>
               <p className="text-sm font-medium text-black group-hover:opacity-70 transition-opacity">Email</p>
-              <p className="text-xs text-gray-400">55lavkush555@email.com</p>
+              <p className="text-xs text-gray-400">55lavkush555@gmail.com</p>
             </div>
           </a>
 

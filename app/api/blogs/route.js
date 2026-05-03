@@ -1,28 +1,16 @@
-import connectDB from '@/lib/mongodb';
+import connectDB from '@/lib/db/connect';
 import Blog from '@/lib/models/Blog';
-import { NextResponse } from 'next/server';
-
-function slugify(text) {
-  return text
-    .toString()
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, '-')
-    .replace(/[^\w-]+/g, '')
-    .replace(/--+/g, '-');
-}
+import { slugify } from '@/lib/utils/slugify';
+import { ok, fail } from '@/lib/utils/apiResponse';
 
 export async function GET() {
   try {
     await connectDB();
     const blogs = await Blog.find({}).sort({ createdAt: -1 }).lean();
-    return NextResponse.json({ blogs });
-  } catch (error) {
-    console.error('[GET /api/blogs]', error.message);
-    return NextResponse.json(
-      { error: error.message || 'Failed to fetch blogs' },
-      { status: 500 }
-    );
+    return ok({ blogs });
+  } catch (err) {
+    console.error('[GET /api/blogs]', err.message);
+    return fail(err.message || 'Failed to fetch blogs');
   }
 }
 
@@ -31,26 +19,15 @@ export async function POST(request) {
     await connectDB();
 
     let body;
-    try {
-      body = await request.json();
-    } catch {
-      return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
-    }
+    try { body = await request.json(); }
+    catch { return fail('Invalid JSON body', 400); }
 
     const { title, imageUrl, content } = body;
-
-    if (!title || !title.trim()) {
-      return NextResponse.json({ error: 'Title is required' }, { status: 400 });
-    }
-    if (!content || !content.trim()) {
-      return NextResponse.json({ error: 'Content is required' }, { status: 400 });
-    }
+    if (!title?.trim()) return fail('Title is required', 400);
+    if (!content?.trim()) return fail('Content is required', 400);
 
     let slug = slugify(title);
-    const existing = await Blog.findOne({ slug }).lean();
-    if (existing) {
-      slug = `${slug}-${Date.now()}`;
-    }
+    if (await Blog.findOne({ slug }).lean()) slug = `${slug}-${Date.now()}`;
 
     const blog = await Blog.create({
       title: title.trim(),
@@ -59,12 +36,9 @@ export async function POST(request) {
       content: content.trim(),
     });
 
-    return NextResponse.json({ blog }, { status: 201 });
-  } catch (error) {
-    console.error('[POST /api/blogs]', error.message);
-    return NextResponse.json(
-      { error: error.message || 'Failed to create blog' },
-      { status: 500 }
-    );
+    return ok({ blog }, 201);
+  } catch (err) {
+    console.error('[POST /api/blogs]', err.message);
+    return fail(err.message || 'Failed to create blog');
   }
 }

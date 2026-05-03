@@ -1,23 +1,11 @@
 import { marked } from 'marked';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import connectDB from '@/lib/mongodb';
-import Blog from '@/lib/models/Blog';
-
-async function getBlog(slug) {
-  try {
-    await connectDB();
-    const blog = await Blog.findOne({ slug }).lean();
-    return blog;
-  } catch (err) {
-    console.error('[getBlog]', err.message);
-    return null;
-  }
-}
+import { getBlogBySlug } from '@/services/blogService';
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const blog = await getBlog(slug);
+  const blog = await getBlogBySlug(slug);
   return {
     title: blog ? `${blog.title} — Blog` : 'Blog Post',
     description: blog ? blog.content.substring(0, 150) : '',
@@ -26,7 +14,7 @@ export async function generateMetadata({ params }) {
 
 export default async function BlogPostPage({ params }) {
   const { slug } = await params;
-  const blog = await getBlog(slug);
+  const blog = await getBlogBySlug(slug);
 
   if (!blog) notFound();
 
@@ -47,24 +35,15 @@ export default async function BlogPostPage({ params }) {
       </Link>
 
       {blog.imageUrl && (
-        <div className="rounded-xl overflow-hidden mb-10 h-72 bg-gray-100">
-          <img
-            src={blog.imageUrl}
-            alt={blog.title}
-            className="w-full h-full object-cover"
-          />
+        <div className="rounded-2xl overflow-hidden mb-10 h-72 bg-gray-100">
+          <img src={blog.imageUrl} alt={blog.title} className="w-full h-full object-cover" />
         </div>
       )}
 
       <p className="text-sm text-gray-400 mb-4">{date}</p>
-      <h1 className="text-4xl font-bold text-black mb-10 leading-tight">
-        {blog.title}
-      </h1>
+      <h1 className="text-4xl font-bold text-black mb-10 leading-tight">{blog.title}</h1>
 
-      <article
-        className="prose"
-        dangerouslySetInnerHTML={{ __html: htmlContent }}
-      />
+      <article className="prose" dangerouslySetInnerHTML={{ __html: htmlContent }} />
     </div>
   );
 }
