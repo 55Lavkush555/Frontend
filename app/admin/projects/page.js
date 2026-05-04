@@ -185,18 +185,18 @@ export default function AdminProjects() {
               <div key={project._id} className="bg-white border border-gray-100 rounded-2xl px-6 py-4 flex items-center gap-4 hover:border-gray-200 transition-colors">
                 {project.imageUrl && (
                   <img src={project.imageUrl} alt={project.name}
-                    className="w-12 h-12 rounded-xl object-cover border border-gray-100 flex-shrink-0" />
+                    className="w-12 h-12 rounded-xl object-cover border border-gray-100 shrink-0" />
                 )}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <p className="text-sm font-medium text-black truncate">{project.name}</p>
                     {project.featured && (
-                      <span className="text-xs bg-black text-white px-2 py-0.5 rounded-full flex-shrink-0">Featured</span>
+                      <span className="text-xs bg-black text-white px-2 py-0.5 rounded-full shrink-0">Featured</span>
                     )}
                   </div>
                   <p className="text-xs text-gray-400 mt-0.5 font-mono">/work/{project.slug}</p>
                 </div>
-                <div className="flex items-center gap-4 flex-shrink-0">
+                <div className="flex items-center gap-4 shrink-0">
                   <button onClick={() => editProject(project)} className="text-xs text-gray-400 hover:text-black transition-colors">Edit</button>
                   <button onClick={() => toggleFeatured(project)} className="text-xs text-gray-400 hover:text-black transition-colors">
                     {project.featured ? 'Unfeature' : 'Feature'}

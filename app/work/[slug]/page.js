@@ -1,20 +1,15 @@
 import { marked } from 'marked';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getProjectBySlug } from '@/services/projectService';
 
-export async function generateMetadata({ params }) {
-  const { slug } = await params;
-  const project = await getProjectBySlug(slug);
-  return {
-    title: project ? `${project.name} — Work` : 'Project',
-    description: project ? project.description.substring(0, 150) : '',
-  };
-}
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
+export const dynamic = 'force-dynamic';
 
 export default async function ProjectDetailPage({ params }) {
   const { slug } = await params;
-  const project = await getProjectBySlug(slug);
+  const res = await fetch(`${baseUrl}/api/projects/${slug}`, { cache: 'no-store' });
+  const data = await res.json();
+  const project = data.data?.project;
 
   if (!project) notFound();
 

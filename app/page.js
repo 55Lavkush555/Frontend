@@ -1,8 +1,13 @@
+'use client';
+
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
 import BlogCard from '@/components/BlogCard';
 import ProjectCard from '@/components/ProjectCard';
-import { getRecentBlogs } from '@/services/blogService';
-import { getFeaturedProjects } from '@/services/projectService';
+
+const baseUrl = typeof window !== 'undefined'
+  ? ''
+  : process.env.NEXT_PUBLIC_BASE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
 
 const techStack = [
   { name: 'HTML', icon: '🌐' },
@@ -19,16 +24,31 @@ const techStack = [
   { name: 'React', icon: '⚛️' },
 ];
 
-export const metadata = {
-  title: 'Lavkush — Portfolio',
-  description: 'Full-stack developer portfolio showcasing projects, blogs, and more.',
-};
+export default function HomePage() {
+  const [featuredProjects, setFeaturedProjects] = useState([]);
+  const [recentBlogs, setRecentBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-export default async function HomePage() {
-  const [featuredProjects, recentBlogs] = await Promise.all([
-    getFeaturedProjects(),
-    getRecentBlogs(3),
-  ]);
+  useEffect(() => {
+    Promise.all([
+      fetch(`${baseUrl}/api/projects?featured=true`, { cache: "no-store" }).then(r => r.json()),
+      fetch(`${baseUrl}/api/blogs`, { cache: "no-store" }).then(r => r.json())
+    ]).then(([projectsRes, blogsRes]) => {
+      setFeaturedProjects(projectsRes.data?.projects || []);
+      setRecentBlogs((blogsRes.data?.blogs || []).slice(0, 3));
+      setLoading(false);
+      console.log("Projects:", projectsRes.data?.projects)
+      console.log("Blogs:", blogsRes.data?.blogs)
+    }).catch(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="max-w-5xl mx-auto px-6 py-24">
+        <div className="text-center">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-24">
@@ -164,7 +184,7 @@ export default async function HomePage() {
                 G
               </div>
               <div>
-                <p className="text-sm font-semibold text-black">Gym Owner</p>
+                <p className="text-sm font-semibold text-black">PowerHouse Gym Owner</p>
                 <p className="text-xs text-gray-400">Satisfied Client</p>
               </div>
             </div>

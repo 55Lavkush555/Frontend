@@ -184,7 +184,7 @@ export default function AdminBlogs() {
                     {' · '}<span className="font-mono">/blog/{blog.slug}</span>
                   </p>
                 </div>
-                <div className="flex items-center gap-4 flex-shrink-0">
+                <div className="flex items-center gap-4 shrink-0">
                   <button onClick={() => editBlog(blog)} className="text-xs text-gray-400 hover:text-black transition-colors">Edit</button>
                   <Link href={`/blog/${blog.slug}`} target="_blank" className="text-xs text-gray-400 hover:text-black transition-colors">View ↗</Link>
                   <button onClick={() => deleteBlog(blog.slug)} className="text-xs text-red-400 hover:text-red-600 transition-colors">Delete</button>

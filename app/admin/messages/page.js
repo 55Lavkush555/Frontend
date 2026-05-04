@@ -106,7 +106,7 @@ export default function AdminMessages() {
                       })}
                     </p>
                   </div>
-                  <div className="flex flex-col gap-2 flex-shrink-0">
+                  <div className="flex flex-col gap-2 shrink-0">
                     {!msg.read && (
                       <button onClick={() => markRead(msg._id)}
                         className="text-xs text-gray-400 hover:text-black transition-colors whitespace-nowrap">

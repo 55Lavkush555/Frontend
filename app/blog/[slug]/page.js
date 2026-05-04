@@ -1,20 +1,15 @@
 import { marked } from 'marked';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getBlogBySlug } from '@/services/blogService';
 
-export async function generateMetadata({ params }) {
-  const { slug } = await params;
-  const blog = await getBlogBySlug(slug);
-  return {
-    title: blog ? `${blog.title} — Blog` : 'Blog Post',
-    description: blog ? blog.content.substring(0, 150) : '',
-  };
-}
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
+export const dynamic = 'force-dynamic';
 
 export default async function BlogPostPage({ params }) {
   const { slug } = await params;
-  const blog = await getBlogBySlug(slug);
+  const res = await fetch(`${baseUrl}/api/blogs/${slug}`, { cache: 'no-store' });
+  const data = await res.json();
+  const blog = data.data?.blog;
 
   if (!blog) notFound();
 

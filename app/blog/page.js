@@ -4,6 +4,9 @@ import { useState, useEffect } from 'react';
 import BlogCard from '@/components/BlogCard';
 
 const POSTS_PER_PAGE = 6;
+const baseUrl = typeof window !== 'undefined'
+  ? ''
+  : process.env.NEXT_PUBLIC_BASE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
 
 export default function BlogPage() {
   const [blogs, setBlogs] = useState([]);
@@ -12,10 +15,10 @@ export default function BlogPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/blogs')
+    fetch(`${baseUrl}/api/blogs`, { cache: "no-store" })
       .then((r) => r.json())
       .then((data) => {
-        setBlogs(data.blogs || []);
+        setBlogs(data.data?.blogs || []);
         setLoading(false);
       })
       .catch(() => setLoading(false));

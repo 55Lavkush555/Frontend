@@ -1,13 +1,33 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import ProjectCard from '@/components/ProjectCard';
-import { getAllProjects } from '@/services/projectService';
 
-export const metadata = {
-  title: 'Work — Lavkush',
-  description: 'Projects built by Lavkush',
-};
+const baseUrl = typeof window !== 'undefined'
+  ? ''
+  : process.env.NEXT_PUBLIC_BASE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
 
-export default async function WorkPage() {
-  const projects = await getAllProjects();
+export default function WorkPage() {
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`${baseUrl}/api/projects`, { cache: "no-store" })
+      .then(r => r.json())
+      .then(data => {
+        setProjects(data.data?.projects || []);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="max-w-5xl mx-auto px-6 py-20 fade-in">
+        <div className="text-center">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-20 fade-in">
