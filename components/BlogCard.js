@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function BlogCard({ blog }) {
   const date = new Date(blog.createdAt).toLocaleDateString('en-US', {
@@ -12,10 +13,12 @@ export default function BlogCard({ blog }) {
       <article className="bg-white border border-gray-100 rounded-2xl overflow-hidden transition-all duration-300 hover:border-gray-300 hover:shadow-lg hover:-translate-y-1">
         {blog.imageUrl && (
           <div className="overflow-hidden h-48 bg-gray-50">
-            <img
+            <Image
               src={blog.imageUrl}
               alt={blog.title}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              width={400}
+              height={400}
             />
           </div>
         )}

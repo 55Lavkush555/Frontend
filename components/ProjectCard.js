@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function ProjectCard({ project }) {
   const excerpt = project.description
@@ -10,10 +11,12 @@ export default function ProjectCard({ project }) {
       <article className="bg-white border border-gray-100 rounded-2xl overflow-hidden transition-all duration-300 hover:border-gray-300 hover:shadow-lg hover:-translate-y-1">
         {project.imageUrl && (
           <div className="overflow-hidden h-48 bg-gray-50">
-            <img
+            <Image
               src={project.imageUrl}
               alt={project.name}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              width={400}
+              height={400}
             />
           </div>
         )}
